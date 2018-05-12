@@ -9,7 +9,7 @@
         <div class="form">
           <input type="search" v-model="url" placeholder="https://speakerdeck.com/qrush/how-to-find-gifs"/>
           <div class="btn">
-            <button @click="submit">Submit</button>
+            <button @click="submit">Open</button>
           </div>
         </div>
       </div>
@@ -65,6 +65,7 @@ export default {
       background-color: #fff;
       border: 1px solid #fff;
       outline: none;
+      font-size: 14px;
     }
     .btn {
       width: 100%;

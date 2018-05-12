@@ -1,4 +1,4 @@
-# spspeakerdeck
+# mobile-speakerdeck
 
 > Nuxt.js project
 

@@ -148,6 +148,7 @@ export default {
       button {
         width: 100%;
         padding: 20px 25px;
+        background: #396;
         color: #fff;
         font-size: 20px;
       }
