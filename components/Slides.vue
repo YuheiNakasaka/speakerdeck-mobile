@@ -13,7 +13,7 @@
             v-show="slideViewables[i]"/>
         </div>
       </div>
-      <div class="controls">
+      <div class="controls" v-show="loading === false">
         <div class="btn left">
           <button @click="clickPrev">PREV</button>
         </div>
@@ -41,6 +41,7 @@ export default {
       slideIds: [],
       windowWidth: 300,
       originalURL: "",
+      loading: true,
       statusMsg: "Loading...",
     };
   },
@@ -62,6 +63,7 @@ export default {
       this.slideId = resp.data.id;
       this.slideIds.push(0, 1, 2);
       this.slideViewables.push(true, false, false);
+      this.loading = false;
     });
   },
   methods: {
