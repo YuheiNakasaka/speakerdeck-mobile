@@ -46,6 +46,6 @@ module.exports = {
     '@nuxtjs/pwa',
   ],
   workbox: {
-    dev: true,
+    dev: false,
   }
 }
