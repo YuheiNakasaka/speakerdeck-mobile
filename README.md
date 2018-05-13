@@ -1,5 +1,7 @@
 # mobile-speakerdeck
 
+Unofficial mobile viewer for Speaker Deck.
+
 ## Build Setup
 
 ``` bash
