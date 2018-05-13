@@ -17,7 +17,7 @@
         <div class="btn left">
           <button @click="clickPrev">PREV</button>
         </div>
-        <div class="btn right">
+        <div class="btn right" :class="isLastSlide() ? 'last' : ''">
           <button @click="clickNext">NEXT</button>
         </div>
       </div>
@@ -35,7 +35,8 @@ export default {
       title: "",
       slideId: "",
       currentId: 0,
-      slideCount: 100,
+      MAX_SLIDE_COUNT: 10000,
+      slideCount: 10000,
       slideViewables: [],
       slideIds: [],
       windowWidth: 300,
@@ -70,16 +71,37 @@ export default {
       this.slideViewables.splice(this.currentId, 1, true);
     },
     clickNext() {
-      const lastId = this.slideIds[this.slideIds.length - 1];
-      this.slideIds.push(lastId + 1);
+      // condition of stop going next
+      if (this.slideCount - this.currentId < 1) return;
+
+      // if set slideCount, stop pushing id to array
+      // to avoid increasing waste item
+      if (this.slideCount === this.MAX_SLIDE_COUNT) {
+        const lastId = this.slideIds[this.slideIds.length - 1];
+        this.slideIds.push(lastId + 1);
+      }
+
       this.slideViewables.splice(this.currentId, 1, false);
       this.currentId++;
       this.slideViewables.splice(this.currentId, 1, true);
     },
+    isLastSlide() {
+      return this.slideCount - this.currentId === 0
+    },
     imgUrl(id) {
+      let vm = this;
       const imageName = this.$store.getters.slideImageType === 2 ? "thumb_slide_" : "slide_";
       const baseURL = `https://speakerd.s3.amazonaws.com/presentations/${this.slideId}/${imageName}`;
       const ext = ".jpg";
+
+      // Check slide count by seeing response of each imgs
+      if (vm.slideCount === this.MAX_SLIDE_COUNT) {
+        const img = new Image();
+        img.onerror = () => {
+          vm.slideCount = id - 1;
+        }
+        img.src = baseURL + id + ext;
+      }
       return baseURL + id + ext;
     },
     getSlideData() {
@@ -157,6 +179,13 @@ export default {
         -webkit-transform: translateY(4px);
         transform: translateY(4px);
         border-bottom: none;
+      }
+      &.last {
+        background: #999;
+        border-bottom: solid 4px #999;
+        button {
+          background: #999;
+        }
       }
     }
   }

@@ -35,6 +35,7 @@ module.exports = {
       }
     }
   },
+  mode: 'spa',
   generate: {
     fallback: true,
   },
