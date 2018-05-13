@@ -1,4 +1,4 @@
-# mobile-speakerdeck
+# speakerdeck-mobile
 
 Unofficial mobile viewer for Speaker Deck.
 
