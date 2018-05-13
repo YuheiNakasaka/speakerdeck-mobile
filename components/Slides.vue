@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="content">
     <div>
       <div>
         <h1><a :href="originalURL" target="_blank" class="original-link">{{ title }}</a></h1>
@@ -46,10 +46,11 @@ export default {
   },
   props: ["prms"],
   mounted () {
+    // Prevent scroll
+    document.querySelector(".content").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+
     // Adjust slide size to fit to screen size.
-    if (process.browser) {
-      this.windowWidth = window.innerWidth;
-    }
+    this.windowWidth = window.innerWidth;
 
     // Set original URL
     this.originalURL = `https://speakerdeck.com/${this.prms.user}/${this.prms.slideName}`;
@@ -94,7 +95,9 @@ export default {
     },
     imgUrl(id) {
       let vm = this;
+      // Switch slide image type
       const imageName = this.$store.getters.slideImageType === 2 ? "thumb_slide_" : "slide_";
+      // Sorry for using direct link of Speaker Deck 🙏
       const baseURL = `https://speakerd.s3.amazonaws.com/presentations/${this.slideId}/${imageName}`;
       const ext = ".jpg";
 
@@ -138,8 +141,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  min-height: 85vh;
+.content {
+  min-height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;

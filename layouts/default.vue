@@ -4,6 +4,12 @@
   </div>
 </template>
 
+<script>
+// Prevent scroll
+document.querySelector("html").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+document.querySelector("body").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+</script>
+
 <style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

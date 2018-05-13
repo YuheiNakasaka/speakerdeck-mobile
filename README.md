@@ -1,7 +1,5 @@
 # mobile-speakerdeck
 
-> Nuxt.js project
-
 ## Build Setup
 
 ``` bash
