@@ -70,7 +70,11 @@ export default {
       this.currentId--;
       this.slideViewables.splice(this.currentId, 1, true);
     },
-    clickNext() {
+    clickNext(event) {
+      // Avoid zooming with double tap
+      event.preventDefault();
+      event.stopPropagation();
+
       // condition of stop going next
       if (this.slideCount - this.currentId < 1) return;
 

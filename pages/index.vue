@@ -31,7 +31,11 @@ export default {
     prms: params,
   }),
   methods: {
-    submit() {
+    submit(event) {
+      // Avoid zooming with double tap
+      event.preventDefault();
+      event.stopPropagation();
+
       const url = this.url.match(/https:\/\/speakerdeck\.com/)
       if (url === null) return;
       const path = this.url.replace(/https:\/\/speakerdeck\.com/, '')
@@ -65,7 +69,7 @@ export default {
       background-color: #fff;
       border: 1px solid #fff;
       outline: none;
-      font-size: 14px;
+      font-size: 16px;
     }
     .btn {
       width: 100%;
