@@ -120,7 +120,7 @@ export default {
 
       if (!is.mobile()) {
         window.location.href = SPEAKERDECK_URL;
-        return;
+        return new Promise((resolve, reject) => {resolve(0)});
       }
 
       return new Promise((resolve, reject) => {
