@@ -45,4 +45,7 @@ module.exports = {
   modules: [
     '@nuxtjs/pwa',
   ],
+  plugins: [
+    { src: '~plugins/ga.js', ssr: false }
+  ],
 }
