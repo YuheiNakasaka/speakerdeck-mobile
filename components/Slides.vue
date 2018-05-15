@@ -152,6 +152,7 @@ export default {
   h1 {
     padding: 10px;
     text-align: left;
+    font-size: 1.1em;
     .original-link {
       color: #fff;
       text-decoration: none;
