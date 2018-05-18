@@ -40,7 +40,7 @@ export default {
       slideViewables: [],
       slideIds: [],
       windowWidth: 300,
-      minHeight: 0,
+      minHeight: 240,
       originalURL: "",
       loading: true,
       statusMsg: "Loading...",
@@ -107,9 +107,11 @@ export default {
       // Check slide count by seeing response of each imgs
       if (vm.slideCount === this.MAX_SLIDE_COUNT) {
         const img = new Image();
-        // Set slide height to fix resolutions.
-        if (vm.minHeight === 0) {
-          vm.minHeight = window.innerWidth * (img.height/img.width);
+        img.onload = () => {
+          // Set slide height to fix resolutions.
+          if (vm.minHeight === 240) {
+            vm.minHeight = window.innerWidth * (img.height/img.width);
+          }
         }
         img.onerror = () => {
           vm.slideCount = id - 1;
