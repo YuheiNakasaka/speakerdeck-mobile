@@ -9,7 +9,7 @@
         <div v-for="i in slideIds" :key="i" class="slide">
           <img
             :src="imgUrl(i)"
-            :style="'width:' + windowWidth + 'px'"
+            :style="'width:' + windowWidth + 'px; min-height:' + minHeight + 'px;'"
             v-show="slideViewables[i]"/>
         </div>
       </div>
@@ -40,6 +40,7 @@ export default {
       slideViewables: [],
       slideIds: [],
       windowWidth: 300,
+      minHeight: 0,
       originalURL: "",
       loading: true,
       statusMsg: "Loading...",
@@ -106,6 +107,10 @@ export default {
       // Check slide count by seeing response of each imgs
       if (vm.slideCount === this.MAX_SLIDE_COUNT) {
         const img = new Image();
+        // Set slide height to fix resolutions.
+        if (vm.minHeight === 0) {
+          vm.minHeight = window.innerWidth * (img.height/img.width);
+        }
         img.onerror = () => {
           vm.slideCount = id - 1;
         }
