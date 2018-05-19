@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <div>
-      <a href="/">Mobile Speaker Deck</a>
+      <a href="/">MSpeakerDeck</a>
     </div>
     <SwitchBtn></SwitchBtn>
   </div>
