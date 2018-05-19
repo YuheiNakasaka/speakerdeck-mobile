@@ -214,9 +214,9 @@ export default {
     }
   }
   .shares {
-    margin: 30px 0 0 0;
+    margin: 30px 0 15px 0;
     padding: 0 10px;
-    text-align: right;
+    text-align: left;
     a {
       display: inline-block;
       padding: 3px 8px 5px 8px;
