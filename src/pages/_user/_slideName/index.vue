@@ -32,9 +32,7 @@ export default {
         },
       });
     }).catch((e) => {
-      callback(null, {
-        statusMsg: "Network error",
-      });
+      callback({ statusCode: 404, message: `${e}` });
     });
   },
 }
