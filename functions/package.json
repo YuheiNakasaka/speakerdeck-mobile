@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "ajv": "^6.0.0",
+    "axios": "^0.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.23.0",
@@ -15,11 +16,10 @@
     "firebase-functions": "0.8.2",
     "lodash": "^4.17.5",
     "nuxt": "1.0.0-rc11",
+    "ua-parser-js": "^0.7.18",
     "vue": "2.4.4",
     "vue-meta": "^1.4.4",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "is_js": "^0.9.0",
-    "axios": "^0.18.0"
+    "vuex": "^3.0.1"
   }
 }
