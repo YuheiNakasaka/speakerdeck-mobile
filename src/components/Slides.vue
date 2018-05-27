@@ -53,6 +53,22 @@ export default {
     };
   },
   props: ["prms", "item"],
+  head () {
+    const ogImg = `https://speakerd.s3.amazonaws.com/presentations/${this.item.slideId}/slide_0.jpg`;
+    return {
+      title: this.item.title,
+      meta: [
+        { hid: "og:title", name: "og:title", property: "og:title", content: this.item.title },
+        { hid: "og:url", name: "og:url", property: "og:url", content: `https://mspeakerdeck.com/${this.prms.user}/${this.prms.slideName}` },
+        { hid: "og:image", name: "og:image", property: "og:image", content: ogImg },
+        { hid: "twitter:card", name: "twitter:card", property: "twitter:card", content: "summary_large_image" },
+        { hid: "twitter:site", name: "twitter:site", property: "twitter:site", content: "@razokulover" },
+        { hid: "twitter:title", name: "twitter:title", property: "twitter:title", content: this.item.title },
+        { hid: "twitter:description", name: "twitter:description", property: "twitter:description", content: "Unofficial mobile viewer for Speaker Deck" },
+        { hid: "twitter:image:src", name: "twitter:image:src", property: "twitter:image:src", content: ogImg },
+      ]
+    }
+  },
   mounted () {
     // Mapping props to state from asyncData.
     this.title = this.item.title;
