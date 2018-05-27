@@ -5,9 +5,11 @@
 </template>
 
 <script>
-// Prevent scroll
-document.querySelector("html").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
-document.querySelector("body").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+if (process.browser) {
+  // Prevent scroll
+  document.querySelector("html").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+  document.querySelector("body").addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+}
 </script>
 
 <style>

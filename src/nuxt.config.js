@@ -3,7 +3,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'Mobile Speaker Deck',
+    title: 'MSpeakerDeck',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no' },
@@ -20,7 +20,22 @@ module.exports = {
   /*
   ** Build configuration
   */
+  buildDir: '../functions/nuxt',
   build: {
+    publicPath: '/assets/',
+    extractCSS: true,
+    babel: {
+      presets: [
+        'env',
+        'stage-0'
+      ],
+      plugins: [
+        ['transform-runtime', {
+          polyfill: true,
+          regenerator: true
+        }],
+      ],
+    },
     /*
     ** Run ESLint on save
     */
@@ -35,7 +50,6 @@ module.exports = {
       }
     }
   },
-  mode: 'spa',
   generate: {
     fallback: true,
   },
