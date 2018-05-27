@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data: () => {
     return {
@@ -52,30 +54,16 @@ export default {
       statusMsg: "Loading...",
     };
   },
-  props: ["prms", "item"],
-  head () {
-    const ogImg = `https://speakerd.s3.amazonaws.com/presentations/${this.item.slideId}/slide_0.jpg`;
-    return {
-      title: `${this.item.title} // mspeakerdeck`,
-      meta: [
-        { hid: "og:title", name: "og:title", property: "og:title", content: this.item.title },
-        { hid: "og:url", name: "og:url", property: "og:url", content: `https://mspeakerdeck.com/${this.prms.user}/${this.prms.slideName}` },
-        { hid: "og:image", name: "og:image", property: "og:image", content: ogImg },
-        { hid: "twitter:card", name: "twitter:card", property: "twitter:card", content: "summary_large_image" },
-        { hid: "twitter:site", name: "twitter:site", property: "twitter:site", content: "@razokulover" },
-        { hid: "twitter:title", name: "twitter:title", property: "twitter:title", content: this.item.title },
-        { hid: "twitter:description", name: "twitter:description", property: "twitter:description", content: "Unofficial mobile viewer for Speaker Deck" },
-        { hid: "twitter:image:src", name: "twitter:image:src", property: "twitter:image:src", content: ogImg },
-      ]
-    }
-  },
+  props: ["prms"],
   mounted () {
     // Mapping props to state from asyncData.
-    this.title = this.item.title;
-    this.slideId = this.item.slideId;
-    this.slideIds.push(0, 1, 2);
-    this.slideViewables.push(true, false, false);
-    this.loading = false;
+    this._fetchSlideData().then((resp) => {
+      this.title = resp.data.title;
+      this.slideId = resp.data.id;
+      this.slideIds.push(0, 1, 2);
+      this.slideViewables.push(true, false, false);
+      this.loading = false;
+    });
 
     // Adjust slide size to fit to screen size.
     this.windowWidth = window.innerWidth;
@@ -85,6 +73,25 @@ export default {
     this.shareURL = `https://mspeakerdeck.com/${this.prms.user}/${this.prms.slideName}`;
   },
   methods: {
+    _fetchSlideData() {
+      let vm = this;
+      const SPEAKERDECK_URL = `https://speakerdeck.com/${this.prms.user}/${this.prms.slideName}`;
+      const CORS_SERVER_URL = "https://us-central1-koecast-182311.cloudfunctions.net/getSpeakerdeckThumb";
+
+      return new Promise((resolve, reject) => {
+        return axios({
+          method: 'post',
+          url: CORS_SERVER_URL,
+          data: {
+            url: SPEAKERDECK_URL,
+          }
+        }).then((resp) =>{
+          resolve(resp);
+        }).catch((e) => {
+          reject(e);
+        });
+      });
+    },
     clickPrev() {
       if (this.currentId === 0) return;
       this.slideViewables.splice(this.currentId, 1, false);
