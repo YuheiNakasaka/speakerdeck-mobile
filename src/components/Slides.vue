@@ -56,7 +56,7 @@ export default {
   head () {
     const ogImg = `https://speakerd.s3.amazonaws.com/presentations/${this.item.slideId}/slide_0.jpg`;
     return {
-      title: this.item.title,
+      title: `${this.item.title} // mspeakerdeck`,
       meta: [
         { hid: "og:title", name: "og:title", property: "og:title", content: this.item.title },
         { hid: "og:url", name: "og:url", property: "og:url", content: `https://mspeakerdeck.com/${this.prms.user}/${this.prms.slideName}` },
