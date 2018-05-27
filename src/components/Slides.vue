@@ -34,9 +34,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-import is from 'is_js';
-
 export default {
   data: () => {
     return {
@@ -55,24 +52,21 @@ export default {
       statusMsg: "Loading...",
     };
   },
-  props: ["prms"],
+  props: ["prms", "item"],
   mounted () {
+    // Mapping props to state from asyncData.
+    this.title = this.item.title;
+    this.slideId = this.item.slideId;
+    this.slideIds.push(0, 1, 2);
+    this.slideViewables.push(true, false, false);
+    this.loading = false;
+
     // Adjust slide size to fit to screen size.
     this.windowWidth = window.innerWidth;
 
     // Set original URL
     this.originalURL = `https://speakerdeck.com/${this.prms.user}/${this.prms.slideName}`;
     this.shareURL = `https://mspeakerdeck.com/${this.prms.user}/${this.prms.slideName}`;
-
-    // Get slide data
-    this.getSlideData().then((resp) => {
-      // Init slides
-      this.title = resp.data.title;
-      this.slideId = resp.data.id;
-      this.slideIds.push(0, 1, 2);
-      this.slideViewables.push(true, false, false);
-      this.loading = false;
-    });
   },
   methods: {
     clickPrev() {
@@ -127,31 +121,6 @@ export default {
       }
       return baseURL + id + ext;
     },
-    getSlideData() {
-      let vm = this;
-      const SPEAKERDECK_URL = `https://speakerdeck.com/${this.prms.user}/${this.prms.slideName}`;
-      const CORS_SERVER_URL = "https://us-central1-koecast-182311.cloudfunctions.net/getSpeakerdeckThumb";
-
-      if (!is.mobile()) {
-        window.location.href = SPEAKERDECK_URL;
-        return new Promise((resolve, reject) => {resolve(0)});
-      }
-
-      return new Promise((resolve, reject) => {
-        return axios({
-          method: 'post',
-          url: CORS_SERVER_URL,
-          data: {
-            url: SPEAKERDECK_URL,
-          }
-        }).then((resp) =>{
-          resolve(resp);
-        }).catch((e) => {
-          vm.statusMsg = "Network error";
-          reject(e)
-        });
-      });
-    }
   },
 }
 </script>
