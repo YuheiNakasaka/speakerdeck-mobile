@@ -1,8 +1,9 @@
 # dependencies
 node_modules
 
-# Nuxt build
-nuxt
+# public
+public
 
-# logs
+# logspa
 npm-debug.log
+firebase-debug.log

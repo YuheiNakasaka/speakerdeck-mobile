@@ -19,5 +19,8 @@
     "vue-meta": "^1.4.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "is_js": "^0.9.0"
   }
 }
