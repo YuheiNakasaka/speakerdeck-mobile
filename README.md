@@ -2,6 +2,8 @@
 
 Unofficial mobile viewer for Speaker Deck.
 
+- [About this service](https://medium.com/@yuheinakasaka/how-to-watch-speaker-deck-comfortably-in-mobile-b2d2face2e79)
+
 ## Build Setup
 
 ``` bash
